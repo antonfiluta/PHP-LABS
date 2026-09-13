@@ -19,7 +19,8 @@
         </div>
     </div>
 
-    <header class="fixed top-4 left-4 right-4 z-20 flex flex-wrap items-center gap-3">
+    <header
+        class="fixed top-0 z-10 w-full py-3.5 px-6 flex flex-wrap items-center gap-3 backdrop-blur-sm bg-stone-950/20 border-b border-white/5">
         <?php
         $links = [
             ['../index.php', ' PHP LABS'],
@@ -37,14 +38,14 @@
     <main class="relative flex min-h-screen items-center justify-center px-6 py-28">
         <div class="w-full max-w-3xl">
             <div class="mb-12 text-center">
-                <p class="php-variant">
-                    Вариант 13
+                <p class="m-0 mb-2.5 text-[11px] tracking-[0.3em] uppercase font-semibold text-sky-400">
+                    Лабораторная работа №2
                 </p>
                 <h1 class="php-h1">
-                    Примеры из методички <br> «Введение в PHP»
+                    Задание 1. <br> Объединение массивов
                 </h1>
-                <p class="text-lg text-stone-400">
-                    Лабораторная работа 1
+                <p class="mt-1.5 mb-0 text-stone-400 text-sm">
+                    Вариант 13 · ВЯП
                 </p>
             </div>
 

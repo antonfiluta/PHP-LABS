@@ -10,6 +10,15 @@ body {
   color: #fafaf9;
 }
 
+:root {
+  color-scheme: dark;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #44403c transparent;
+}
+
 button.primary {
   padding: 10px;
   border: solid 1px var(--primary-color);
@@ -25,7 +34,7 @@ button.primary {
 
 .php-h1 {
   @reference "tailwindcss";
-  @apply mb-4 bg-linear-to-br from-white to-stone-400 bg-clip-text text-5xl font-bold tracking-tight text-transparent
+  @apply text-5xl font-bold tracking-[-0.02em] bg-gradient-to-br from-white to-stone-400 bg-clip-text text-transparent;
 }
 
 .php-h2 {
