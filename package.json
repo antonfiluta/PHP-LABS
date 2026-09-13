@@ -1,0 +1,22 @@
+{
+  "scripts": {
+    "tw": "tailwindcss -i ./src/input.css -o ./src/output.css --watch"
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "prettier-plugin-tailwindcss": "^0.8.1",
+    "tailwindcss": "^4.3.3"
+  },
+  "name": "lr",
+  "version": "1.0.0",
+  "description": "",
+  "main": "fiveserver.config.js",
+  "devDependencies": {
+    "@prettier/plugin-php": "^0.25.0",
+    "prettier": "^3.9.6"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}

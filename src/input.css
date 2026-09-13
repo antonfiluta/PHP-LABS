@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+body {
+  font-family: 'Lato', sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #fafaf9;
+}
+
+button.primary {
+  padding: 10px;
+  border: solid 1px var(--primary-color);
+  background: var(--primary-color);
+  color: white;
+  border-radius: 8px;
+}
+
+.block-bg {
+  @reference "tailwindcss";
+  @apply rounded-xl border-[0.5px] border-stone-200 bg-stone-50/40 shadow-md backdrop-blur-sm dark:border-stone-800 dark:bg-stone-900/65;
+}
