@@ -1,12 +1,9 @@
 <?php
 declare(strict_types=1);
 
-/**
- * Массив студентов: имя + оценки по предметам.
- */
 $students = [
     [
-        'name' => 'Иванов И.И.',
+        'name' => 'Пархоменко Г.А.',
         'grades' => ['Математика' => 5, 'Физика' => 4, 'Информатика' => 5],
     ],
     [
@@ -14,22 +11,19 @@ $students = [
         'grades' => ['Математика' => 3, 'Физика' => 4, 'Информатика' => 4],
     ],
     [
-        'name' => 'Сидорова А.А.',
-        'grades' => ['Математика' => 4, 'Физика' => 4, 'Информатика' => 4],
-    ],
-    [
-        'name' => 'Кузнецов К.К.',
+        'name' => 'Суханова С.С.',
         'grades' => ['Математика' => 5, 'Физика' => 5, 'Информатика' => 5],
     ],
     [
-        'name' => 'Смирнова О.О.',
-        'grades' => ['Математика' => 4, 'Физика' => 3, 'Информатика' => 5],
+        'name' => 'Кузнецов К.К.',
+        'grades' => ['Математика' => 3, 'Физика' => 5, 'Информатика' => 5],
+    ],
+    [
+        'name' => 'Филюта А.Д.',
+        'grades' => ['Математика' => 4, 'Физика' => 4, 'Информатика' => 5],
     ],
 ];
 
-/**
- * Чистая функция: проверяет, все ли оценки >= 4.
- */
 function hasAllGradesAtLeastFour(array $student): bool
 {
     foreach ($student['grades'] as $grade) {
@@ -55,94 +49,86 @@ function averageGrade(array $grades): float
 
 <head>
     <meta charset="UTF-8">
-    <title>Задание 3 — Студенты</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 40px auto;
-        }
-
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            margin: 15px 0;
-        }
-
-        th,
-        td {
-            border: 1px solid #ccc;
-            padding: 8px;
-            text-align: left;
-        }
-
-        th {
-            background: #007bff;
-            color: white;
-        }
-
-        .good {
-            background: #e0ffe0;
-        }
-
-        a {
-            color: #007bff;
-        }
-    </style>
+    <title>PHP LABS | TASK 3</title>
+    <link href="../output.css" rel="stylesheet">
 </head>
 
-<body>
-    <h1>Задание 3. Студенты без оценок ниже 4</h1>
+<body class="min-h-screen antialiased">
+    <div class="fixed inset-0 -z-10 overflow-hidden bg-linear-to-br from-stone-950 via-stone-950 to-stone-900">
+        <div class="absolute -top-40 -right-40 h-96 w-96 rounded-full bg-sky-500/10 blur-3xl"></div>
+        <div class="absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-sky-500/10 blur-3xl">
+        </div>
+        <div
+            class="absolute top-1/2 left-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl bg-sky-400/10">
+        </div>
+    </div>
 
-    <h2>Все студенты</h2>
-    <table>
-        <tr>
-            <th>Имя</th>
-            <th>Математика</th>
-            <th>Физика</th>
-            <th>Информатика</th>
-            <th>Средний балл</th>
-        </tr>
-        <?php foreach ($students as $s): ?>
-            <tr>
-                <td><?= htmlspecialchars($s['name']) ?></td>
-                <?php foreach ($s['grades'] as $grade): ?>
-                    <td><?= $grade ?></td>
-                <?php endforeach; ?>
-                <td><?= averageGrade($s['grades']) ?></td>
-            </tr>
+    <header class="fixed top-4 left-4 right-4 z-20 flex flex-wrap items-center gap-3">
+        <?php
+        $links = [
+            ['../index.php', ' PHP LABS'],
+            ['./lab-base.php', '← Prev Page'],
+        ];
+
+        foreach ($links as [$href, $title]): ?>
+            <a href="<?= htmlspecialchars($href) ?>"
+                class=" rounded-lg flex items-center gap-2 border px-4 py-2 text-sm font-medium backdrop-blur-md transition-all duration-200 hover:shadow-lg hover:shadow-sky-500/5 border-white/10 bg-white/5 hover:bg-white/10!">
+                <?= htmlspecialchars($title) ?>
+            </a>
         <?php endforeach; ?>
-    </table>
+    </header>
 
-    <h2>Студенты без оценок ниже 4</h2>
-    <?php if (empty($excellentStudents)): ?>
-        <p>Нет студентов, удовлетворяющих условию.</p>
-    <?php else: ?>
-        <table>
-            <tr>
-                <th>Имя</th>
-                <th>Оценки</th>
-                <th>Средний балл</th>
-            </tr>
-            <?php foreach ($excellentStudents as $s): ?>
-                <tr class="good">
-                    <td><?= htmlspecialchars($s['name']) ?></td>
-                    <td>
-                        <?php
-                        $parts = [];
-                        foreach ($s['grades'] as $subject => $g) {
-                            $parts[] = htmlspecialchars($subject) . ': ' . $g;
-                        }
-                        echo implode(', ', $parts);
-                        ?>
-                    </td>
-                    <td><?= averageGrade($s['grades']) ?></td>
-                </tr>
-            <?php endforeach; ?>
-        </table>
-    <?php endif; ?>
+    <main class="relative flex min-h-screen items-center justify-center px-6 py-28">
+        <div class="w-full max-w-3xl">
+            <div class="mb-12 text-center">
+                <p class="php-variant">
+                    Вариант 13
+                </p>
+                <h1 class="php-h1">
+                    Задание 3.<br> Студенты без оценок ниже 4
+                </h1>
+                <p class="text-lg text-stone-400">
+                    Лабораторная работа 1
+                </p>
+            </div>
 
-    <p><a href="index.php">← На главную</a></p>
+            <h2 class="php-h2">Все студенты</h2>
+            <div class="code">
+                <?php
+                foreach ($students as $student): ?>
+                    <p class="font-bold"><?= $student['name'] ?>:</p>
+                    <ul class="pl-2 mb-3">
+                        <?php foreach ($student['grades'] as $subject => $grade): ?>
+                            <li><?= $subject . ': ' . $grade ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                <?php endforeach; ?>
+            </div>
+
+            <h2 class="php-h2">Студенты без оценок ниже 4</h2>
+            <div class="code">
+                <?php
+                if (count($students) < 0) {
+                    echo 'Список пуст';
+                }
+                ?>
+
+                <?php
+                foreach ($excellentStudents as $student): ?>
+                    <p class="font-bold"><?= $student['name'] ?>:</p>
+                    <ul class="pl-2 mb-3">
+                        <?php foreach ($student['grades'] as $subject => $grade): ?>
+                            <li><?= $subject . ': ' . $grade ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                <?php endforeach; ?>
+            </div>
+
+            <footer class="mt-10 text-center text-xs text-stone-500 dark:text-stone-500">
+                © <?= date('Y') ?> · PHP Labs
+            </footer>
+        </div>
+    </main>
 </body>
 
 </html>

@@ -1,180 +1,146 @@
 <?php
 declare(strict_types=1);
 
-/**
- * Собственный класс исключения для ошибок валидации.
- * Наследуется от базового Exception.
- */
-class ValidationException extends Exception
+class ValidationException extends \Exception
 {
-    /** @var array Массив ошибок валидации (поле => сообщение) */
-    private array $errors;
-
     public function __construct(
-        array $errors,
         string $message = 'Ошибка валидации',
     ) {
         parent::__construct($message);
-        $this->errors = $errors;
-    }
-
-    /** Возвращает список ошибок по полям */
-    public function getErrors(): array
-    {
-        return $this->errors;
     }
 }
 
-/**
- * Чистая функция валидации данных.
- * Возвращает true, если всё корректно, иначе бросает ValidationException.
- */
-function validateUserData(array $data): bool
+class UserData
 {
-    $errors = [];
-
-    // Проверка имени: не пустое, минимум 2 символа
-    $name = trim($data['name'] ?? '');
-    if ($name === '') {
-        $errors['name'] = 'Имя не может быть пустым.';
-    } elseif (mb_strlen($name) < 2) {
-        $errors['name'] = 'Имя должно содержать минимум 2 символа.';
+    public function __construct(
+        public string $username,
+        public string $password,
+        public string $email,
+    ) {
     }
 
-    // Проверка email через filter_var
-    $email = trim($data['email'] ?? '');
-    if ($email === '') {
-        $errors['email'] = 'Email не может быть пустым.';
-    } elseif (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
-        $errors['email'] = 'Некорректный формат email.';
+    public function validateUser(): bool
+    {
+        if (empty($this->username))
+            throw new ValidationException('UserName не может быть пустым');
+        if (empty($this->password))
+            throw new ValidationException($this->username . ' забыл поставить пароль');
+        if (empty($this->email))
+            throw new ValidationException('Email не может быть пустым');
+        return true;
     }
 
-    if (!empty($errors)) {
-        throw new ValidationException($errors);
-    }
-
-    return true;
-}
-
-// --- Обработка формы ---
-$result = null; // успешный результат
-$errors = []; // ошибки валидации
-$sentData = []; // отправленные данные (для повторного заполнения)
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $sentData = [
-        'name' => $_POST['name'] ?? '',
-        'email' => $_POST['email'] ?? '',
-    ];
-
-    try {
-        validateUserData($sentData);
-        $result = 'Данные успешно прошли валидацию!';
-    } catch (ValidationException $e) {
-        $errors = $e->getErrors();
-    } catch (Throwable $e) {
-        // На случай непредвиденных ошибок
-        $errors['general'] = 'Непредвиденная ошибка: ' . $e->getMessage();
+    public function getData(): string
+    {
+        return
+            'Username: ' . $this->username . "<br>"
+            . 'Password: ' . $this->password . "<br>"
+            . 'Email: ' . $this->email . "<br>";
     }
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
 
 <head>
     <meta charset="UTF-8">
-    <title>Задание 2 — ValidationException</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 600px;
-            margin: 40px auto;
-        }
-
-        .field {
-            margin-bottom: 12px;
-        }
-
-        label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 4px;
-        }
-
-        input {
-            width: 100%;
-            padding: 8px;
-            box-sizing: border-box;
-        }
-
-        button {
-            padding: 10px 20px;
-            background: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background: #0056b3;
-        }
-
-        .errors {
-            background: #ffe0e0;
-            border-left: 5px solid #d00;
-            padding: 12px;
-            margin: 15px 0;
-        }
-
-        .success {
-            background: #e0ffe0;
-            border-left: 5px solid #0a0;
-            padding: 12px;
-            margin: 15px 0;
-        }
-
-        .error-item {
-            color: #d00;
-        }
-    </style>
+    <title>PHP LABS | TASK 2</title>
+    <link href="../output.css" rel="stylesheet">
 </head>
 
-<body>
-    <h1>Задание 2. Валидация с ValidationException</h1>
-
-    <?php if ($result !== null): ?>
-        <div class="success"><?= htmlspecialchars($result) ?></div>
-    <?php endif; ?>
-
-    <?php if (!empty($errors)): ?>
-        <div class="errors">
-            <strong>Найдены ошибки:</strong>
-            <ul>
-                <?php foreach ($errors as $field => $msg): ?>
-                    <li class="error-item">
-                        <?= htmlspecialchars($field) ?>: <?= htmlspecialchars(
-                              $msg,
-                          ) ?>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
+<body class="min-h-screen antialiased">
+    <div class="fixed inset-0 -z-10 overflow-hidden bg-linear-to-br from-stone-950 via-stone-950 to-stone-900">
+        <div class="absolute -top-40 -right-40 h-96 w-96 rounded-full bg-sky-500/10 blur-3xl"></div>
+        <div class="absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-sky-500/10 blur-3xl">
         </div>
-    <?php endif; ?>
-
-    <form method="post">
-        <div class="field">
-            <label for="name">Имя:</label>
-            <input type="text" id="name" name="name" value="<?= htmlspecialchars($sentData['name'] ?? '') ?>">
+        <div
+            class="absolute top-1/2 left-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl bg-sky-400/10">
         </div>
-        <div class="field">
-            <label for="email">Email:</label>
-            <input type="text" id="email" name="email" value="<?= htmlspecialchars($sentData['email'] ?? '') ?>">
-        </div>
-        <button type="submit">Проверить</button>
-    </form>
+    </div>
 
-    <p><a href="index.php">← На главную</a></p>
+    <header class="fixed top-4 left-4 right-4 z-20 flex flex-wrap items-center gap-3">
+        <?php
+        $links = [
+            ['../index.php', ' PHP LABS'],
+            ['./lab-base.php', '← Prev Page'],
+        ];
+
+        foreach ($links as [$href, $title]): ?>
+            <a href="<?= htmlspecialchars($href) ?>"
+                class=" rounded-lg flex items-center gap-2 border px-4 py-2 text-sm font-medium backdrop-blur-md transition-all duration-200 hover:shadow-lg hover:shadow-sky-500/5 border-white/10 bg-white/5 hover:bg-white/10!">
+                <?= htmlspecialchars($title) ?>
+            </a>
+        <?php endforeach; ?>
+    </header>
+
+    <main class="relative flex min-h-screen items-center justify-center px-6 py-28">
+        <div class="w-full max-w-3xl">
+            <div class="mb-12 text-center">
+                <p class="php-variant">
+                    Вариант 13
+                </p>
+                <h1 class="php-h1">
+                    Задание 2. <br> Валидация с ValidationException
+                </h1>
+                <p class="text-lg text-stone-400">
+                    Лабораторная работа 1
+                </p>
+            </div>
+
+            <p class="php-h2">Результат без ошибок</p>
+            <div class="code">
+                <?php
+                $data = new UserData('Anton', 'my_sycret', 'anotn@mail.ru');
+
+                try {
+                    $result = $data->validateUser();
+
+                    if ($result)
+                        echo "Successfully create UserData: <br><br>" . $data->getData();
+                } catch (ValidationException $e) {
+                    echo "Got error: " . $e->getMessage();
+                }
+                ?>
+            </div>
+
+            <p class="php-h2">Результат с ошибкой</p>
+            <div class="code">
+                <?php
+                $data = new UserData('Graph Monte-Christo', '', 'monte@mail.ru');
+
+                try {
+                    $result = $data->validateUser();
+
+                    if ($result)
+                        echo "Successfully create UserData: <br><br>" . $data->getData();
+                } catch (ValidationException $e) {
+                    echo "Got error: " . $e->getMessage();
+                }
+                ?>
+            </div>
+
+            <p class="php-h2">Результат без ошибок</p>
+            <div class="code">
+                <?php
+                $data = new UserData('Sofia', 'murmur', '****');
+
+                try {
+                    $result = $data->validateUser();
+
+                    if ($result)
+                        echo "Successfully create UserData: <br><br>" . $data->getData();
+                } catch (ValidationException $e) {
+                    echo "Got error: " . $e->getMessage();
+                }
+                ?>
+            </div>
+
+            <footer class="mt-10 text-center text-xs text-stone-500 dark:text-stone-500">
+                © <?= date('Y') ?> · PHP Labs
+            </footer>
+        </div>
+    </main>
 </body>
 
 </html>

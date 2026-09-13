@@ -40,9 +40,8 @@
                 <p class="mb-3 text-xs font-semibold tracking-[0.3em] text-sky-400 uppercase">
                     Вариант 13
                 </p>
-                <h1
-                    class="mb-4 bg-linear-to-br from-white to-stone-400 bg-clip-text text-4xl font-bold tracking-tight text-transparent sm:text-5xl">
-                    Лабораторная работа №12
+                <h1 class="php-h1">
+                    Лабораторная работа №1
                 </h1>
                 <p class="text-lg text-stone-400">
                     Основные конструкции PHP, функциональный стиль, исключения
@@ -52,10 +51,10 @@
             <nav class="grid gap-3">
                 <?php
                 $tasks = [
-                    ['./lab1/task1.php', '01', 'Дата и время'],
-                    ['./lab1/task2.php', '02', 'ValidationException'],
-                    ['./lab1/task3.php', '03', 'Студенты с оценками'],
-                    ['./lab1/examples.php', '·', 'Примеры из лекции'],
+                    ['task1.php', '01', 'Дата и время'],
+                    ['task2.php', '02', 'ValidationException'],
+                    ['task3.php', '03', 'Студенты с оценками'],
+                    ['lab-examples.php', '·', 'Примеры из лекции'],
                 ];
                 foreach ($tasks as [$href, $num, $title]): ?>
                     <a href="<?= htmlspecialchars($href) ?>"

@@ -5,12 +5,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PHP LABS — Лабораторные работы</title>
-    <link href="output.css" rel="stylesheet">
+    <title>PHP LABS | TASK 1</title>
+    <link href="../output.css" rel="stylesheet">
 </head>
 
 <body class="min-h-screen antialiased">
-
     <div class="fixed inset-0 -z-10 overflow-hidden bg-linear-to-br from-stone-950 via-stone-950 to-stone-900">
         <div class="absolute -top-40 -right-40 h-96 w-96 rounded-full bg-sky-500/10 blur-3xl"></div>
         <div class="absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-sky-500/10 blur-3xl">
@@ -24,7 +23,7 @@
         <?php
         $links = [
             ['../index.php', ' PHP LABS'],
-            ['', '← Prev Page'],
+            ['./lab-base.php', '← Prev Page'],
         ];
 
         foreach ($links as [$href, $title]): ?>
@@ -37,10 +36,23 @@
 
     <main class="relative flex min-h-screen items-center justify-center px-6 py-28">
         <div class="w-full max-w-3xl">
+            <div class="mb-12 text-center">
+                <p class="php-variant">
+                    Вариант 13
+                </p>
+                <h1 class="php-h1">
+                    Примеры из методички <br> «Введение в PHP»
+                </h1>
+                <p class="text-lg text-stone-400">
+                    Лабораторная работа 1
+                </p>
+            </div>
 
+            <footer class="mt-10 text-center text-xs text-stone-500 dark:text-stone-500">
+                © <?= date('Y') ?> · PHP Labs
+            </footer>
         </div>
     </main>
-
 </body>
 
 </html>

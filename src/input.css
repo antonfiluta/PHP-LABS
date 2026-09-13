@@ -20,5 +20,25 @@ button.primary {
 
 .block-bg {
   @reference "tailwindcss";
-  @apply rounded-xl border-[0.5px] border-stone-200 bg-stone-50/40 shadow-md backdrop-blur-sm dark:border-stone-800 dark:bg-stone-900/65;
+  @apply rounded-xl border-[0.5px] shadow-md backdrop-blur-sm border-stone-800 bg-stone-900/65;
+}
+
+.php-h1 {
+  @reference "tailwindcss";
+  @apply mb-4 bg-linear-to-br from-white to-stone-400 bg-clip-text text-5xl font-bold tracking-tight text-transparent
+}
+
+.php-h2 {
+  @reference "tailwindcss";
+  @apply my-2 bg-linear-to-br from-white to-stone-400 bg-clip-text text-xl font-bold tracking-tight text-transparent
+}
+
+.php-variant {
+  @reference "tailwindcss";
+  @apply mb-3 text-xs font-semibold tracking-[0.3em] uppercase text-sky-400
+}
+
+.code {
+  @reference "tailwindcss";
+  @apply rounded-xl border-[0.5px] shadow-md backdrop-blur-sm border-stone-800 bg-stone-900/65 p-4 font-mono;
 }

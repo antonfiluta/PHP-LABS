@@ -42,8 +42,7 @@
                 <p class="mb-3 text-xs font-semibold tracking-[0.3em] text-sky-600 uppercase dark:text-sky-400">
                     Вариант 13
                 </p>
-                <h1
-                    class="mb-4 bg-linear-to-br from-stone-900 to-stone-600 bg-clip-text text-4xl font-bold tracking-tight text-transparent sm:text-5xl dark:from-white dark:to-stone-400">
+                <h1 class="php-h1">
                     Лабораторные работы
                 </h1>
                 <p class="text-lg text-stone-600 dark:text-stone-400">
