@@ -57,13 +57,13 @@
                     ['lab-examples.php', '·', 'Примеры из лекции'],
                 ];
                 foreach ($tasks as [$href, $num, $title]): ?>
-                    <a href="<?= htmlspecialchars($href) ?>"
+                    <a href="<?= $href ?>"
                         class="block-bg overflow-hidden group flex items-center gap-4 px-4 py-4 transition-all duration-150 hover:bg-white/10!">
                         <span
                             class="flex min-w-12 justify-center px-1 text-center rounded-md bg-linear-to-br from-white/10 to-white/5 text-3xl font-bold text-white/60">
-                            <?= htmlspecialchars($num) ?>
+                            <?= $num ?>
                         </span>
-                        <span class="flex-1 font-medium text-stone-100"><?= htmlspecialchars($title) ?></span>
+                        <span class="flex-1 font-medium text-stone-100"><?= $title ?></span>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                             stroke="currentColor"
                             class="h-5 w-5 text-stone-400 transition-all duration-200 group-hover:text-white">

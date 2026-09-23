@@ -10,7 +10,7 @@ $cycler = new InfiniteCycler($colors);
 $error = null;
 $firstEight = [];
 try {
-    $firstEight = $cycler->take(8);
+    $firstEight = $cycler->take(100);
 } catch (InvalidArgumentException $e) {
     $error = $e->getMessage();
 }

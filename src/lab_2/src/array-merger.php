@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 class ArrayMerger
 {
+    /**
+     * @param array ...$arrays Произвольное количество массивов.
+     * @return array<int, mixed> Массив уникальных значений.
+     */
     public function mergeUnique(array ...$arrays): array
     {
         $seen = [];
@@ -21,4 +25,4 @@ class ArrayMerger
 
         return $result;
     }
-}
+} ?>

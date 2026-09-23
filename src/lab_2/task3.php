@@ -1,27 +1,44 @@
 <?php
 declare(strict_types=1);
 
-$defaultInput = "Привет\nИСИТ\nБГУИР\nПрограммирование\nPHP";
-$rawInput = $_POST['lines'] ?? $defaultInput;
-$lines = [];
+/**
+ * Строки для отображения. Размер шрифта будет пропорционален длине.
+ *
+ * @var array<int, string> $lines
+ */
+$lines = [
+    'PHP',
+    'Массивы',
+    'Коллекции',
+    'Итераторы',
+    'Программирование',
+    'Информационные системы',
+    'БГУИР',
+];
 
-foreach (explode("\n", str_replace(["\r\n", "\r"], "\n", $rawInput)) as $line) {
-    $line = trim($line);
-    if ($line !== '') {
-        $lines[] = $line;
-    }
-}
-
+/**
+ * Размер шрифта в пикселях в зависимости от длины строки.
+ * Формула: 14 + длина * 2, ограничение сверху — 32px.
+ *
+ * @param int $length Длина строки в символах.
+ * @return int Размер шрифта в пикселях.
+ */
 function font_size_for_length(int $length): int
 {
     return min(32, 14 + $length * 2);
 }
 
+/**
+ * CSS-класс цвета текста в зависимости от длины строки.
+ *
+ * @param int $length Длина строки в символах.
+ * @return string Имя CSS-класса Tailwind.
+ */
 function color_for_length(int $length): string
 {
     return match (true) {
-        $length >= 10 => 'text-sky-300',
-        $length >= 6 => 'text-stone-100',
+        $length >= 15 => 'text-sky-300',
+        $length >= 8 => 'text-stone-100',
         default => 'text-stone-400',
     };
 }
@@ -31,6 +48,7 @@ function color_for_length(int $length): string
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PHP LABS | TASK 3</title>
     <link href="../output.css" rel="stylesheet">
 </head>
@@ -73,43 +91,29 @@ function color_for_length(int $length): string
                 </p>
             </div>
 
-            <p class="php-h2">Форма ввода</p>
-            <form method="post" class="block-bg p-4 mb-6">
-                <label for="lines" class="block mb-2 text-sm font-medium text-stone-300">
-                    Введите строки (по одной на строку):
-                </label>
-                <textarea id="lines" name="lines" rows="6" required
-                    class="w-full rounded-lg border border-white/10 bg-white/5 p-3 text-stone-100 font-mono text-sm focus:border-sky-400 focus:outline-none focus:ring-1 focus:ring-sky-400"><?= htmlspecialchars($rawInput, ENT_QUOTES, 'UTF-8') ?></textarea>
-                <div class="mt-3 flex gap-3">
-                    <button type="submit"
-                        class="rounded-lg bg-sky-500 px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-sky-400">
-                        Построить список
-                    </button>
-                    <button type="reset"
-                        class="rounded-lg border border-white/10 bg-white/5 px-5 py-2 text-sm font-medium text-stone-300 transition-colors hover:bg-white/10">
-                        Очистить
-                    </button>
-                </div>
-            </form>
-
-            <p class="php-h2">Список с размером шрифта по длине</p>
+            <p class="php-h2">Исходные строки</p>
             <div class="code">
-                <?php if (empty($lines)): ?>
-                    <p class="text-stone-500">Нет данных для отображения.</p>
-                <?php else: ?>
-                    <ul class="pl-6 list-disc space-y-2">
-                        <?php foreach ($lines as $line):
-                            $len = mb_strlen($line, 'UTF-8');
-                            $size = font_size_for_length($len);
-                            $color = color_for_length($len);
-                            ?>
-                            <li style="font-size: <?= $size ?>px;" class="<?= $color ?>">
-                                <?= htmlspecialchars($line, ENT_QUOTES, 'UTF-8') ?>
-                                <span class="text-xs text-stone-500 ml-2">(<?= $len ?> симв.)</span>
-                            </li>
-                        <?php endforeach; ?>
-                    </ul>
-                <?php endif; ?>
+                <ul class="pl-4 list-disc">
+                    <?php foreach ($lines as $line): ?>
+                        <li class="text-stone-400"><?= $line ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+
+            <p class="php-h2">Размер шрифта пропорционален длине</p>
+            <div class="code">
+                <ul class="pl-6 list-disc space-y-2">
+                    <?php foreach ($lines as $line):
+                        $len = mb_strlen($line, 'UTF-8');
+                        $size = font_size_for_length($len);
+                        $color = color_for_length($len);
+                        ?>
+                        <li style="font-size: <?= $size ?>px;" class="<?= $color ?>">
+                            <?= $line ?>
+                            <span class="text-xs text-stone-500 ml-2">(<?= $len ?> симв.)</span>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
             </div>
 
             <footer class="mt-10 text-center text-xs text-stone-500">

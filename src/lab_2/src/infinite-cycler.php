@@ -31,4 +31,4 @@ class InfiniteCycler
 
         return $result;
     }
-}
+} ?>
