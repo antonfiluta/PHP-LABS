@@ -7,6 +7,8 @@ declare(strict_types=1);
  * @var array<int, string> $lines
  */
 $lines = [
+    'a',
+    'aa',
     'PHP',
     'Массивы',
     'Коллекции',

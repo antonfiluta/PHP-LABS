@@ -28,9 +28,9 @@
         ];
 
         foreach ($links as [$href, $title]): ?>
-            <a href="<?= htmlspecialchars($href) ?>"
+            <a href="<?= $href ?>"
                 class=" rounded-lg flex items-center gap-2 border px-4 py-2 text-sm font-medium backdrop-blur-md transition-all duration-200 hover:shadow-lg hover:shadow-sky-500/5 border-white/10 bg-white/5 hover:bg-white/10!">
-                <?= htmlspecialchars($title) ?>
+                <?= $title ?>
             </a>
         <?php endforeach; ?>
     </header>
@@ -58,19 +58,19 @@
                 $labs = [
                     ['lab_1/lab-base.php', '01', 'Основные конструкции PHP, функциональный стиль, исключения'],
                     ['lab_2/lab-base.php', '02', 'Работа с коллекциями и встроенными структурами данных'],
-                    ['lab_3/lab-base.php', '03', '????'],
+                    ['lab_3/lab-base.php', '03', 'Создание и использование объектов и встроенных классов. Наследование, инкапсуляция и интерфейсы'],
                     ['lab_3/lab-base.php', '04', '????'],
                     ['lab_3/lab-base.php', '05', '????'],
                     ['lab_3/lab-base.php', '07', '????'],
                 ];
                 foreach ($labs as [$href, $num, $title]): ?>
-                    <a href="<?= htmlspecialchars($href) ?>"
+                    <a href="<?= $href ?>"
                         class="block-bg overflow-hidden group flex items-center gap-4 px-4 py-4 transition-all duration-150 hover:bg-white/10!">
                         <span
                             class="flex px-1 text-center rounded-md bg-linear-to-br from-white/10 to-white/5 text-3xl font-bold text-white/60">
-                            <?= htmlspecialchars($num) ?>
+                            <?= $num ?>
                         </span>
-                        <span class="flex-1 font-medium text-stone-100"><?= htmlspecialchars($title) ?></span>
+                        <span class="flex-1 font-medium text-stone-100"><?= $title ?></span>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                             stroke="currentColor"
                             class="h-5 w-5 text-stone-400 transition-all duration-200 group-hover:text-white">

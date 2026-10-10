@@ -5,6 +5,10 @@ class InfiniteCycler
 {
     private ArrayIterator $source;
 
+    /**
+     * @param array<int|string, mixed> $items Исходные элементы.
+     * @throws InvalidArgumentException Если массив пуст.
+     */
     public function __construct(array $items)
     {
         if ($items === []) {
@@ -13,6 +17,11 @@ class InfiniteCycler
         $this->source = new ArrayIterator($items);
     }
 
+    /**
+     * @param int $count Сколько элементов выдать (> 0).
+     * @return array<int, mixed>
+     * @throws InvalidArgumentException Если $count <= 0.
+     */
     public function take(int $count): array
     {
         if ($count <= 0) {
@@ -31,4 +40,4 @@ class InfiniteCycler
 
         return $result;
     }
-} ?>
+}
