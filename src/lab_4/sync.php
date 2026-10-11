@@ -13,7 +13,6 @@ if (!isset($_SESSION['user'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    // Клиент запрашивает прогресс с сервера
     echo json_encode([
         'progress' => $_SESSION['progress'] ?? [],
     ], JSON_UNESCAPED_UNICODE);
@@ -32,7 +31,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $courses = get_courses();
 
-    // Мержим: completed-модуль остаётся completed, если отмечен хотя бы на одной стороне
     foreach ($clientProgress as $moduleId => $data) {
         if (!is_string($moduleId) || find_module($courses, $moduleId) === null) {
             continue;
