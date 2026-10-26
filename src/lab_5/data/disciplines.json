@@ -38,5 +38,13 @@
         "semester": 8,
         "hours": 108,
         "faculty": "ФИТУ"
+    },
+    {
+        "id": 7,
+        "name": "Конфликтология",
+        "teacher": "Арина И.А.",
+        "semester": 1,
+        "hours": 103,
+        "faculty": "ФКС"
     }
 ]

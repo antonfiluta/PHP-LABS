@@ -3,9 +3,6 @@ declare(strict_types=1);
 
 namespace App\Traits;
 
-/**
- * Трейт логирования: добавляет метод log() в любой класс.
- */
 trait Loggable
 {
     protected function log(string $message): void

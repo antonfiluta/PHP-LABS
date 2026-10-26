@@ -11,6 +11,7 @@ abstract class Product implements Discountable
     protected string $name = '';
     protected float $price = 0.0;
 
+
     public function __construct(string $name, float $price)
     {
         $this->id = uniqid('p_', true);

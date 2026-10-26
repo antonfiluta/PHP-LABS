@@ -3,9 +3,6 @@ declare(strict_types=1);
 
 namespace App\Interfaces;
 
-/**
- * Контракт для товаров, к которым применима скидка.
- */
 interface Discountable
 {
     /**

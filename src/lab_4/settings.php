@@ -25,11 +25,10 @@ if (!in_array($lang, $allowedLangs, true)) {
     $lang = 'ru';
 }
 
-// Устанавливаем безопасные куки на 30 дней
 $options = [
     'expires' => time() + 86400 * 30,
     'path' => '/',
-    'httponly' => false,   // тема нужна JS для мгновенного применения
+    'httponly' => false,
     'samesite' => 'Lax',
 ];
 
