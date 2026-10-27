@@ -12,7 +12,6 @@ $classRepo = new ClassRepository();
 $lessonRepo = new LessonRepository();
 $classes = $classRepo->all();
 
-// --- Класс ---
 if ($isStudent) {
     $classId = (int) ($user['class_id'] ?? 0);
 } else {
@@ -21,13 +20,11 @@ if ($isStudent) {
         exit('Нет классов. Запустите seed.php.');
 }
 
-// --- Предмет (для всех ролей) ---
 $filterSubject = $_GET['subject'] ?? null;
 $subjects = $isStudent
     ? (new GradeRepository())->subjectsForStudent((int) $user['id'])
     : $lessonRepo->subjectsForClass($classId);
 
-// --- Неделя ---
 $monday = $_GET['monday'] ?? date('Y-m-d', strtotime('monday this week'));
 if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $monday)) {
     $monday = date('Y-m-d', strtotime('monday this week'));
@@ -50,7 +47,6 @@ foreach ($classes as $c) {
     }
 }
 
-// Хелпер для сохранения параметров в ссылке
 function buildUrl(array $params): string
 {
     $clean = array_filter($params, fn($v) => $v !== null && $v !== '');

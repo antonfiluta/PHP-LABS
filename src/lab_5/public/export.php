@@ -10,7 +10,6 @@ header('Content-Type: text/csv; charset=utf-8');
 header('Content-Disposition: attachment; filename=disciplines.csv');
 
 $out = fopen('php://output', 'w');
-// BOM для корректного отображения в Excel
 fwrite($out, "\xEF\xBB\xBF");
 
 fputcsv($out, ['ID', 'Название', 'Преподаватель', 'Семестр', 'Часы', 'Факультет'], ';');

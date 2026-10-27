@@ -12,7 +12,6 @@ $input = json_decode(file_get_contents('php://input'), true) ?? [];
 try {
     switch ($action) {
 
-        // -------- Получить список с фильтром/сортировкой --------
         case 'get':
             $items = $model->getAll();
 
@@ -33,7 +32,6 @@ try {
             ], JSON_UNESCAPED_UNICODE);
             break;
 
-        // -------- Добавить --------
         case 'add':
             $name = trim((string) ($input['name'] ?? ''));
             $teacher = trim((string) ($input['teacher'] ?? ''));
@@ -58,7 +56,6 @@ try {
             echo json_encode(['success' => true, 'item' => $item], JSON_UNESCAPED_UNICODE);
             break;
 
-        // -------- Редактировать --------
         case 'edit':
             $id = (int) ($input['id'] ?? 0);
             $field = (string) ($input['field'] ?? '');
@@ -77,7 +74,6 @@ try {
             echo json_encode(['success' => $ok], JSON_UNESCAPED_UNICODE);
             break;
 
-        // -------- Удалить --------
         case 'delete':
             $id = (int) ($input['id'] ?? 0);
             if ($id <= 0) {
@@ -87,7 +83,6 @@ try {
             echo json_encode(['success' => $model->delete($id)], JSON_UNESCAPED_UNICODE);
             break;
 
-        // -------- Переключить хранилище --------
         case 'switch':
             $type = (string) ($input['type'] ?? 'json');
             $model->switchStorage($type);

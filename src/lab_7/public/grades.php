@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 require_once __DIR__ . '/../app/init.php';
-requireRole('student');   // ← только ученик
+requireRole('student');
 
 $user = currentUser();
 $repo = new GradeRepository();
@@ -81,7 +81,8 @@ $avg = $grades
                                 <tr class="border-t border-white/5">
                                     <td class="px-4 py-2 text-stone-400"><?= e($g['lesson_date']) ?></td>
                                     <td class="px-4 py-2 text-stone-400">
-                                        <?= e(LessonRepository::SLOTS[(int) $g['slot']] ?? '') ?></td>
+                                        <?= e(LessonRepository::SLOTS[(int) $g['slot']] ?? '') ?>
+                                    </td>
                                     <td class="px-4 py-2"><?= e($g['subject']) ?></td>
                                     <td class="px-4 py-2 text-stone-500 truncate max-w-xs"
                                         title="<?= e($g['homework'] ?? '') ?>">

@@ -1,10 +1,6 @@
 <?php
 declare(strict_types=1);
 
-/**
- * Singleton PDO-подключения.
- * Настройки — через переменные окружения, с разумными дефолтами.
- */
 function db(): PDO
 {
     static $pdo = null;

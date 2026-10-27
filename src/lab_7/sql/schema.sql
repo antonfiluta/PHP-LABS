@@ -21,7 +21,7 @@ CREATE TABLE users (
     password_hash  VARCHAR(255) NOT NULL,
     role           ENUM('student', 'teacher', 'admin') DEFAULT 'student',
     class_id       INT NULL,
-    subjects       JSON NULL,           -- список предметов для учителя
+    subjects       JSON NULL,
     created_at     TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (class_id) REFERENCES classes(id) ON DELETE SET NULL
 );

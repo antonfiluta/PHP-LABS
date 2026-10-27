@@ -10,7 +10,7 @@ use Dompdf\Options;
 $model = new DisciplineModel();
 $items = $model->getAll();
 
-// --- Формируем HTML для PDF ---
+
 $html = '<!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -58,7 +58,6 @@ $html .= '</tbody></table>
 </body>
 </html>';
 
-// --- Рендер PDF ---
 $options = new Options();
 $options->set('isRemoteEnabled', true);
 $options->set('defaultFont', 'DejaVu Sans');
@@ -68,5 +67,4 @@ $dompdf->loadHtml($html, 'UTF-8');
 $dompdf->setPaper('A4', 'portrait');
 $dompdf->render();
 
-// Отдаём файл в браузер
 $dompdf->stream('disciplines.pdf', ['Attachment' => true]);

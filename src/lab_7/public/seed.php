@@ -4,7 +4,6 @@ require_once __DIR__ . '/../app/init.php';
 
 set_time_limit(120);
 
-// ---------- Очистка ----------
 db()->exec('SET FOREIGN_KEY_CHECKS=0');
 foreach (['grades', 'lessons', 'users', 'classes'] as $t) {
     db()->exec("TRUNCATE TABLE {$t}");
@@ -140,16 +139,13 @@ $gradeStmt = db()->prepare(
     'INSERT INTO grades (lesson_id, user_id, grade) VALUES (?, ?, ?)'
 );
 
-// Для каждой недели (текущая + следующая)
 for ($week = 0; $week < 2; $week++) {
     $weekMonday = $monday->modify("+{$week} week");
 
-    // Пн..Сб (6 дней)
     for ($d = 0; $d < 6; $d++) {
         $date = $weekMonday->modify("+{$d} day")->format('Y-m-d');
 
         foreach ($classIds as $cid) {
-            // 4–7 уроков в день
             $slotCount = random_int(4, 7);
             $allSlots = array_keys(LessonRepository::SLOTS);
             shuffle($allSlots);
@@ -165,11 +161,10 @@ for ($week = 0; $week < 2; $week++) {
                 try {
                     $lessonId = $lessonRepo->create($cid, $subject, $date, $slot, $homework);
                 } catch (Throwable $e) {
-                    continue;   // конфликт уникальности — пропускаем
+                    continue;
                 }
                 $lessonCount++;
 
-                // Оценки ученикам класса — 70% вероятность
                 foreach ($studentsByClass[$cid] as $sid) {
                     if (random_int(1, 10) <= 7) {
                         $gradeStmt->execute([$lessonId, $sid, random_int(3, 10)]);
